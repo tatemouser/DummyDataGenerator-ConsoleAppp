@@ -20,10 +20,10 @@ A lightweight console application for generating realistic, customizable dummy d
 
 ### 2. **Define Table Structure (Custom Mode)**
 - Enter fields one at a time:
-name string
-email email
-age int
-createdAt date
+  - `name string`
+  - `email email`
+  - `age int`
+  - `createdAt date`
 
 - Type `done` when finished
 
@@ -49,9 +49,9 @@ createdAt date
 
 ### 4. **Preview Sample Output**
 - Display first few rows for review:
-name,email,age,createdAt
-Alice,a1@mockmail.com,29,2024-12-14
-Bob,b7@mockmail.com,41,2024-03-22
+	- name,email,age,createdAt
+	- Alice,a1@mockmail.com,29,2024-12-14
+	- Bob,b7@mockmail.com,41,2024-03-22
 
 
 ---
@@ -102,4 +102,3 @@ Choose export format (CSV/JSON):
 
 
 ## TODO: Plugin alternative to starting app manually
-
