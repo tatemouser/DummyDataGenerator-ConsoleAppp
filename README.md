@@ -1,104 +1,111 @@
 ﻿# 🧪 DummyDataGenerator
 
-A lightweight console application for generating realistic, customizable dummy data — ideal for seeding databases, testing APIs, or populating user interfaces.
+A lightweight tool for generating realistic, customizable dummy data — ideal for seeding databases, testing APIs, or populating UIs. Supports both a **console interface** and a **simple Web API** for flexibility.
 
 ---
 
 ## 🎯 Goals
 
 - Generate mock data with user-defined fields and types
-- Provide a simple command-line interface (CLI)
+- Provide both a simple command-line interface (CLI) and Web API
 - Export data in common formats (CSV, JSON)
 - Enable quick testing without writing manual SQL inserts
 
 ---
 
-## 🔄 Flow of Application
+## 🖥️ Console App Flow
 
-### 1. **Select Data Type**
-- Choose from predefined templates (`User`, `Order`, etc.) or define a **custom table**
-
-### 2. **Define Table Structure (Custom Mode)**
+### 1. **Define Table Structure**
 - Enter fields one at a time:
-  - `name string`
-  - `email email`
-  - `age int`
-  - `createdAt date`
+  - `name`
+  - `email`
+  - `age`
+  - `createdAt`
 
-- Type `done` when finished
-
-#### Supported Data Types:
-| Type     | Description                         |
-|----------|-------------------------------------|
-| `string` | Random words or names               |
-| `int`    | Random integer                      |
-| `date`   | Random past date                    |
-| `email`  | Fake email address                  |
-| `phone`  | Formatted phone number              |
-| `uuid`   | Unique identifier (GUID)            |
-| `bool`   | Random true/false                   |
+- Select data type for each:
+  - `string`, `int`, `date`, `bool`
 
 ---
 
-### 3. **Specify Row Count**
+### 2. **Specify Row Count**
 - Prompt:  
-`"How many rows do you want to generate?"`  
-- Example: `100`
+  "How many rows would you like to generate?"
 
 ---
 
-### 4. **Preview Sample Output**
-- Display first few rows for review:
-	- name,email,age,createdAt
-	- Alice,a1@mockmail.com,29,2024-12-14
-	- Bob,b7@mockmail.com,41,2024-03-22
-
-
----
-
-### 5. **Export Options**
-- Choose export format:
-- `CSV` — Import into SQL Server, Excel, etc.
-- `JSON` — For APIs, configs, or Mongo-like input
+### 3. **Preview Sample Output**
+- Displays first few rows for review:
+  name,email  
+  User1234,user5678@example.com  
+  ...
 
 ---
 
-### 6. **Navigation**
-- Return to main menu
-- Start a new generation cycle
-- Exit the program
+### 4. **Export Options**
+- Choose whether to:
+  - Save to `/output/` folder
+  - Delete the generated file
 
 ---
 
+## 🌐 API Support
 
+Run the Web API project to generate dummy data programmatically via `POST /api/generate`.
 
-## TODO: Plugin alternative to starting app manually
+### 🔗 Example Request (JSON)
+POST /api/generate  
+Content-Type: application/json
 
-## 🧪 Example Usage
+{
+  "fields": [
+    { "name": "email" },
+    { "name": "date" },
+    { "name": "name" }
+  ],
+  "rowCount": 3,
+  "format": "json"
+}
 
-```plaintext
-Select data type (Custom/User/Order): Custom
+### ✅ Expected Response
 
-Enter column name and type (e.g., name string), or 'done' to finish:
-> name string
-> email email
-> age int
-> createdAt date
-> done
+[
+  { "email": "user1283@example.com", "date": "2024-03-10", "name": "User9837" },
+  ...
+]
 
-How many rows to generate?
-> 100
+Also supports `"format": "csv"` to return a downloadable CSV file.
 
-Here is a preview of your data:
-name,email,age,createdAt
-Alice,a1@mockmail.com,29,2024-12-14
+---
+
+## 🧪 Example CLI Session
+
+Enter column name for column #1: name  
+Type for 'name': string  
+Enter column name for column #2: email  
+Type for 'email': string  
+How many rows? > 100
+
+✅ Data preview:  
+name,email  
+User1234,user7890@example.com  
 ...
 
-Choose export format (CSV/JSON):
-> CSV
+✅ Exported to /output/data_2025-05-28.csv
 
-✅ Data exported to /output/data_2025-05-27.csv
+---
 
+## ✅ Features Covered
 
+- Console mode with live prompts
+- Output preview
+- Save or discard option
+- Reusable generation logic
+- API endpoint for programmatic use
 
-## TODO: Plugin alternative to starting app manually
+---
+
+## 🔧 TODO
+
+- Add frontend UI for API consumption
+- Add unit tests for generation service
+- Add plugin to skip CLI manual launch
