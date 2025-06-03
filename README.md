@@ -1,61 +1,47 @@
-﻿# 🧪 DummyDataGenerator
+# 🧪 DummyDataGenerator
+## End-to-End Data Generator with API and CI/CD Integration
 
-A lightweight tool for generating realistic, customizable dummy data — ideal for seeding databases, testing APIs, or populating UIs. Supports both a **console interface** and a **simple Web API** for flexibility.
+A lightweight tool for generating customizable mock data — ideal for seeding databases, testing APIs, or populating UIs. Includes a **console application**, a **Web API**, and a **comprehensive test suite**.
 
 ---
 
-## 🎯 Goals
+## 🚀 Core Features
 
-- Generate mock data with user-defined fields and types
-- Provide both a simple command-line interface (CLI) and Web API
-- Export data in common formats (CSV, JSON)
-- Enable quick testing without writing manual SQL inserts
+| Area         | Features Included                                                                 |
+|--------------|-----------------------------------------------------------------------------------|
+| 🎛 Console   | Step-by-step prompts for field creation, row count, preview, and file export     |
+| 🌐 API       | `POST /api/generate` returns data in JSON or CSV via simple request body         |
+| 💾 Output    | Saves files in `/output/` with timestamped naming, previewable via CLI           |
+| 🧪 Testing   | Full suite: Unit, Validation, Boundary, API, Integration, and GitHub CI          |
+| 🔁 Reusability | Shared services for both API and console for easy maintenance and expansion    |
 
 ---
 
 ## 🖥️ Console App Flow
 
-### 1. **Define Table Structure**
-- Enter fields one at a time:
-  - `name`
-  - `email`
-  - `age`
-  - `createdAt`
+1. **Define Fields & Types**
+   - Example: `name string`, `email email`, `age int`, `createdAt date`
 
-- Select data type for each:
-  - `string`, `int`, `date`, `bool`
+2. **Specify Row Count**
+   - Prompt: `"How many rows would you like to generate?"`
 
----
+3. **Preview Output**
+   - Displays the first 5 rows in the terminal
 
-### 2. **Specify Row Count**
-- Prompt:  
-  "How many rows would you like to generate?"
+4. **Export Options**
+   - Saves to `/output/`
+   - Optional: delete most recent file with confirmation
 
 ---
 
-### 3. **Preview Sample Output**
-- Displays first few rows for review:
-  name,email  
-  User1234,user5678@example.com  
-  ...
+## 🌐 API Endpoint
 
----
+Start the Web API project and use:
 
-### 4. **Export Options**
-- Choose whether to:
-  - Save to `/output/` folder
-  - Delete the generated file
+**POST** `/api/generate`  
+**Content-Type**: `application/json`
 
----
-
-## 🌐 API Support
-
-Run the Web API project to generate dummy data programmatically via `POST /api/generate`.
-
-### 🔗 Example Request (JSON)
-POST /api/generate  
-Content-Type: application/json
-
+```json
 {
   "fields": [
     { "name": "email" },
@@ -65,47 +51,48 @@ Content-Type: application/json
   "rowCount": 3,
   "format": "json"
 }
+```
 
-### ✅ Expected Response
-
-[
-  { "email": "user1283@example.com", "date": "2024-03-10", "name": "User9837" },
-  ...
-]
-
-Also supports `"format": "csv"` to return a downloadable CSV file.
+✅ **Response:**  
+Returns structured dummy data in JSON (or CSV if specified)
 
 ---
 
-## 🧪 Example CLI Session
+## 🧪 Testing Coverage
 
-Enter column name for column #1: name  
-Type for 'name': string  
-Enter column name for column #2: email  
-Type for 'email': string  
-How many rows? > 100
+All testing handled in the `DummyDataGenerator.Tests` project:
 
-✅ Data preview:  
-name,email  
-User1234,user7890@example.com  
-...
-
-✅ Exported to /output/data_2025-05-28.csv
+| Type           | Coverage Details                                                    |
+|----------------|---------------------------------------------------------------------|
+| ✅ Unit Tests   | Core generation logic (BuildInMemory, GetValueForType)            |
+| 🔍 Validation   | User input correctness, null fields, invalid types                |
+| 📏 Boundary     | Row limits, field limits, string/number boundaries                |
+| 🌐 API Tests    | End-to-end calls to `/api/generate` for JSON and CSV              |
+| 📂 Integration  | File creation and preview checks from the `/output` directory     |
+| ⚙️ CI Setup     | GitHub Actions automatically builds and runs tests on every push  |
 
 ---
 
-## ✅ Features Covered
+## ✅ Accomplishments
 
-- Console mode with live prompts
-- Output preview
-- Save or discard option
-- Reusable generation logic
-- API endpoint for programmatic use
+- 🔄 Console and API modes built using shared logic
+- 📂 Organized project structure (.sln with 3 subprojects)
+- 🧪 Over 35 automated tests grouped by category
+- 🛠️ Full GitHub Actions CI workflow running on push
+- 🚫 Cleaned up broken submodule and fixed cross-platform issues
+- 🔁 Reusable services for extensibility
+- 📦 Ready for frontend consumption or deployment
 
 ---
 
-## 🔧 TODO
+## Installation & Usage
 
-- Add frontend UI for API consumption
-- Add unit tests for generation service
-- Add plugin to skip CLI manual launch
+1. Clone the repository
+2. Run `dotnet build` to build the solution
+3. For console app: `dotnet run --project DummyDataGenerator.Console`
+4. For API: `dotnet run --project DummyDataGenerator.API`
+5. Run tests: `dotnet test`
+
+---
+
+*Let me know if you want this turned into a downloadable file, or want a version that includes project badges (like GitHub Actions passing, .NET version, etc.).*
