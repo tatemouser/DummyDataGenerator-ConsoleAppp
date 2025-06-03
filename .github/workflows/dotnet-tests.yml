@@ -20,7 +20,10 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: 📦 Restore dependencies
-      run: dotnet restore
+      run: dotnet restore DummyDataGenerator.sln
+      working-directory: ${{ github.workspace }}
 
     - name: 🧪 Run all tests
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test DummyDataGenerator.sln --no-restore --verbosity normal
+      working-directory: ${{ github.workspace }}
+
